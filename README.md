@@ -54,3 +54,92 @@ The project provides an insightful comparison between collaborative filtering an
 ## Acknowledgements
 
 This project uses the Yelp dataset for educational purposes. The methods and approaches are based on standard practices in recommender systems and machine learning.
+
+## Description of Functions and Classes
+
+### Functions
+
+1. **`readData(chunksize=20000)`**:
+   - Reads the business and review data in chunks from JSON files.
+   - Parameters: `chunksize` - Size of each data chunk.
+   - Returns: Chunks of business and review data.
+
+2. **`filterBusinesses(businesses)`**:
+   - Filters the business dataset to include only relevant columns and businesses categorized as restaurants.
+   - Parameters: `businesses` - DataFrame of business data.
+   - Returns: Filtered DataFrame of businesses.
+
+3. **`filterReviews(reviews)`**:
+   - Filters the reviews dataset to include only user ID, business ID, stars, and date.
+   - Parameters: `reviews` - DataFrame of review data.
+   - Returns: Filtered DataFrame of reviews.
+
+4. **`combineDataframes(businesses, reviews)`**:
+   - Merges the business and review datasets on the business ID.
+   - Parameters: `businesses`, `reviews` - DataFrames of business and review data.
+   - Returns: Merged DataFrame.
+
+5. **`createPivotTable(all_combined)`**:
+   - Creates a pivot table from the combined dataset for collaborative filtering.
+   - Parameters: `all_combined` - Merged DataFrame of businesses and reviews.
+   - Returns: User-item pivot table.
+
+6. **`calculate_similarity(user_item_matrix)`**:
+   - Calculates the cosine similarity matrix from the user-item matrix.
+   - Parameters: `user_item_matrix` - User-item pivot table.
+   - Returns: Cosine similarity matrix.
+
+7. **`predict_ratings(similarity, user_item_matrix, user_id)`**:
+   - Predicts ratings for all items for a given user.
+   - Parameters: `similarity`, `user_item_matrix`, `user_id`.
+   - Returns: Predicted ratings for the user.
+
+8. **`train_test_split_and_predict(data)`**:
+   - Splits the data into train and test sets, predicts ratings, and returns the true and predicted ratings.
+   - Parameters: `data` - User-item pivot table.
+   - Returns: True and predicted ratings.
+
+9. **`evaluate_performance(data)`**:
+   - Evaluates the performance of the collaborative filtering algorithm.
+   - Parameters: `data` - User-item pivot table.
+   - Returns: RMSE and MAE values.
+
+10. **`trainCollabFiltering(chunksize)`**:
+    - Orchestrates the collaborative filtering training process.
+    - Parameters: `chunksize` - Size of data chunks.
+    - Returns: Performance metrics (RMSE, MAE).
+
+11. **`encodingData(dataset)`**:
+    - Encodes the user and business IDs in the dataset.
+    - Parameters: `dataset` - Combined DataFrame of businesses and reviews.
+    - Returns: Encoded dataset.
+
+12. **`trainNN(combinedDataset)`**:
+    - Trains the neural network model on the combined dataset.
+    - Parameters: `combinedDataset` - Combined DataFrame of businesses and reviews.
+    - Returns: RMSE and MAE values.
+
+13. **`trainANN(chunksize)`**:
+    - Orchestrates the neural network training process.
+    - Parameters: `chunksize` - Size of data chunks.
+    - Returns: Combined DataFrame for ANN training.
+
+14. **`main()`**:
+    - Main function to run the project.
+
+### Classes
+
+1. **`EmbeddingLayer`**:
+   - A class representing an embedding layer in the neural network.
+   - Attributes:
+     - `n_items`: Number of items (users or restaurants).
+     - `n_factors`: Number of latent factors.
+   - Method:
+     - `__call__(self, x)`: Applies embedding and reshape operations to the input.
+
+2. **`Recommender`**:
+   - Builds the neural network model for the recommender system.
+   - Parameters: `n_users`, `n_rests`, `n_factors`, `min_rating`, `max_rating`.
+   - Returns: Compiled Keras model.
+
+Each function and class plays a crucial role in the pipeline of reading, processing, and analyzing the dataset to build and evaluate the recommender system using two different methodologies.
