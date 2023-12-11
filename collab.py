@@ -1,3 +1,5 @@
+# Final code for Collaborative filter and ANN models
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
